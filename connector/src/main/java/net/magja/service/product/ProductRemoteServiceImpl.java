@@ -909,14 +909,17 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
     }
 
     properties.put("is_in_stock", BooleanUtils.toBoolean(product.getInStock()) ? "1" : "0");
+
     if (product.getManageStock() != null) {
       properties.put("manage_stock", BooleanUtils.toBoolean(product.getManageStock()) ? "1" : "0");
     }
+
     if (product.getUseConfigManageStock() != null) {
       properties.put("use_config_manage_stock", BooleanUtils.toBoolean(product.getUseConfigManageStock()) ? "1" : "0");
     }
+
     try {
-      soapClient.callArgs(ResourcePath.ProductStockUpdate, new Object[] { product.getId() != null ? product.getId() : product.getSku(), properties });
+      soapClient.callArgs(ResourcePath.ProductStockUpdate, new Object[] { product.getSku() != null ? product.getSku() : product.getId(), properties });
     } catch (final AxisFault e) {
       log.error("Cannot update inventory for product " + product.getId(), e);
       if (debug) {
