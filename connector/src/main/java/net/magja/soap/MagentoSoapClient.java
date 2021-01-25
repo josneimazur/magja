@@ -286,6 +286,8 @@ public class MagentoSoapClient implements SoapClient {
     connectOptions.setTimeOutInMilliSeconds(60000);
     connectOptions.setProperty(HTTPConstants.MC_GZIP_REQUEST, true);
     connectOptions.setProperty(HTTPConstants.MC_ACCEPT_GZIP, true);
+    connectOptions.setProperty(HTTPConstants.SO_TIMEOUT, new Integer(60000));
+    connectOptions.setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(60000));
 
     // add auth information, if enabled,
     if (config.isHttpAuthEnabled()) {
